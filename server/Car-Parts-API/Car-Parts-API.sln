@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Car-Parts-API", "Car-Parts-API\Car-Parts-API.csproj", "{D0F18D03-E026-4E70-AC3F-404382FE7D15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Car-Parts-API", "Car-Parts-API\Car-Parts-API.csproj", "{D0F18D03-E026-4E70-AC3F-404382FE7D15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Car-Parts-API.Core", "Car-Parts-API.Core\Car-Parts-API.Core.csproj", "{4CF7B724-382F-4FA8-9D61-E498BDF55149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Car-Parts-API.Infrastructure", "Car-Parts-API.Infrastructure\Car-Parts-API.Infrastructure.csproj", "{74F277E9-BC6E-4B2F-AA41-8D3C9D499A71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D0F18D03-E026-4E70-AC3F-404382FE7D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0F18D03-E026-4E70-AC3F-404382FE7D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0F18D03-E026-4E70-AC3F-404382FE7D15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF7B724-382F-4FA8-9D61-E498BDF55149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF7B724-382F-4FA8-9D61-E498BDF55149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF7B724-382F-4FA8-9D61-E498BDF55149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF7B724-382F-4FA8-9D61-E498BDF55149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F277E9-BC6E-4B2F-AA41-8D3C9D499A71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F277E9-BC6E-4B2F-AA41-8D3C9D499A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F277E9-BC6E-4B2F-AA41-8D3C9D499A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F277E9-BC6E-4B2F-AA41-8D3C9D499A71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
