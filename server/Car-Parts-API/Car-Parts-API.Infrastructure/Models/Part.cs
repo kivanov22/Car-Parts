@@ -1,19 +1,26 @@
-﻿namespace Car_Parts_API.Infrastructure.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Car_Parts_API.Infrastructure.Models
 {
     public class Part
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        [Key]
+        public int Id { get; set; }
 
-        public int PartTypeId { get; set; }
-
-        public Part_Types Part_Types { get; set; }
+        
         public required string PartName { get; set; }
 
         public int PartNumber { get; set; }
 
-        public string PartDescription { get; set; }
+        public string? PartDescription { get; set; }
 
-        public string PartBrand { get; set; }
+        public required string PartBrand { get; set; }
+
+        [ForeignKey("PartTypeId")]
+        public int PartTypeId { get; set; }
+
+        public PartType Part_Types { get; set; }
 
         //public int Warranty { get; set; }
 
