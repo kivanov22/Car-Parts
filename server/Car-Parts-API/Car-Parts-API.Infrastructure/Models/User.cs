@@ -1,6 +1,8 @@
-﻿namespace Car_Parts_API.Infrastructure.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Car_Parts_API.Infrastructure.Models
 {
-    public class User
+    public class User:IdentityUser
     {
         public string Username { get; set; } = string.Empty;
 
