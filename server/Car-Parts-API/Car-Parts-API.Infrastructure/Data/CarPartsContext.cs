@@ -1,9 +1,10 @@
 ﻿using Car_Parts_API.Infrastructure.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Car_Parts_API.Infrastructure.Data
 {
-    public class CarPartsContext:IdentityDbContext<>
+    public class CarPartsContext:IdentityDbContext<User>
     {
         public CarPartsContext(DbContextOptions<CarPartsContext> options)
             :base(options)
@@ -38,5 +39,11 @@ namespace Car_Parts_API.Infrastructure.Data
         public DbSet<VehiclePart> VehicleParts { get; set; }
 
         public DbSet<VehicleType> VehicleTypes { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }
