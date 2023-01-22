@@ -8,6 +8,6 @@
 
         public int ModelId { get; set; }
 
-        public VehicleModel Vehicle_Model { get; set; }
+        public VehicleModel VehicleModel { get; set; }
     }
 }

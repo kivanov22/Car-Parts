@@ -7,7 +7,6 @@ namespace Car_Parts_API.Infrastructure.Data.Models
     {
         //This table would store detailed information about the current inventory of parts, including the
         //quantity on hand, reorder level, and the supplier details.
-        //Ask chatgpt Inventory and Vendor
         [Key]
         public int Id { get; set; }
 

@@ -11,7 +11,6 @@ namespace Car_Parts_API.Infrastructure.Data.Models
         [Key]
         public int Id { get; set; }
 
-
         public DateTime OrderDate { get; set; }
 
         public int Quantity { get; set; }

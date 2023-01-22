@@ -20,7 +20,7 @@ namespace Car_Parts_API.Infrastructure.Data.Models
         [ForeignKey("PartTypeId")]
         public int PartTypeId { get; set; }
 
-        public PartType Part_Types { get; set; }
+        public PartType PartTypes { get; set; }
 
         //public int Warranty { get; set; }
 
