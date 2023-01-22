@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Car_Parts_API.Infrastructure.Models
+namespace Car_Parts_API.Infrastructure.Data.Models
 {
     public class Part
     {
         [Key]
         public int Id { get; set; }
 
-        
+
         public required string PartName { get; set; }
 
         public int PartNumber { get; set; }

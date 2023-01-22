@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Car_Parts_API.Infrastructure.Models
+namespace Car_Parts_API.Infrastructure.Data.Models
 {
     public class Vehicle_make
     {
