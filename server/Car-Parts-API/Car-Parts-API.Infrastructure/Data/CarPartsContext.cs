@@ -1,15 +1,18 @@
-﻿using Car_Parts_API.Infrastructure.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Car_Parts_API.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Car_Parts_API.Infrastructure.Data
 {
-    public class CarPartsContext:IdentityDbContext<User>
+    public class CarPartsContext:DbContext
     {
-        public CarPartsContext(DbContextOptions<CarPartsContext> options)
-            :base(options)
-        {
+        protected readonly IConfiguration Configuration;
 
+        public CarPartsContext(DbContextOptions<CarPartsContext> options, IConfiguration configuration)
+            : base(options)
+        {
+            Configuration = configuration;
         }
 
         public DbSet<Compatibility> Compatibilities { get; set; }
@@ -41,9 +44,11 @@ namespace Car_Parts_API.Infrastructure.Data
         public DbSet<VehicleType> VehicleTypes { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnConfiguring(optionsBuilder);
+            var connectionString = Configuration.GetConnectionString("DBConnection");
+            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
     }
 }
