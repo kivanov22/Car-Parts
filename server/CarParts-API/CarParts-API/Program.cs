@@ -1,9 +1,15 @@
 global using CarParts.API.Infrastructure.Data;
 global using Microsoft.EntityFrameworkCore;
+using CarParts.API.Core.Interfaces;
+using CarParts.API.Core.Services;
+using CarParts.API.Infrastructure.Data.Repository;
+using CarParts_API.SeedData;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPartService, PartService>();
 //var connection = builder.Configuration["ConnectionStrings:localhost"];
 builder.Services.AddControllers();
 builder.Services.AddDbContext<CarPartsContext>(options =>
@@ -11,9 +17,12 @@ builder.Services.AddDbContext<CarPartsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 });
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 
@@ -23,7 +32,6 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 
-//Configure(app);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -38,32 +46,23 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
-
-app.Run();
-
-//void Configure(WebApplication host)
+//Seed Database
+//using (var scope = app.Services.CreateScope())
 //{
-//    using var scope = host.Services.CreateScope();
 //    var services = scope.ServiceProvider;
 
 //    try
 //    {
-//        var dbContext = services.GetRequiredService<CarPartsContext>();
-
-//        if (dbContext.Database.IsMySql())
-//        {
-//            dbContext.Database.Migrate();
-//        }
-
-//        //var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-//        //var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
-//        DataSeeder.Seed(dbContext);
+//        var context = services.GetRequiredService<CarPartsContext>();
+//        //                    context.Database.Migrate();
+//        context.Database.EnsureCreated();
+//        SeedData.Seed(services);
 //    }
 //    catch (Exception ex)
 //    {
-//        //Log some error
-//        Console.WriteLine(ex.Message);
-//        throw;
+//        var logger = services.GetRequiredService<ILogger<Program>>();
+//        logger.LogError(ex, "An error occurred seeding the DB. {exceptionMessage}", ex.Message);
 //    }
 //}
+
+app.Run();
