@@ -12,20 +12,21 @@ namespace CarParts.API.Infrastructure.Data.Repository
         public UnitOfWork(CarPartsContext context)
         {
             _context = context;
+            Parts = new PartRepository(_context);
         }
 
-        public IRepository<Part> Parts
-        {
-            get
-            {
-                if (_parts == null)
-                {
-                    _parts = new PartRepository(_context);
-                }
+        //public IRepository<Part> Parts
+        //{
+        //    get
+        //    {
+        //        if (_parts == null)
+        //        {
+        //            _parts = new PartRepository(_context);
+        //        }
 
-                return _parts;
-            }
-        }
+        //        return _parts;
+        //    }
+        //}
 
         public async Task CommitAsync()
         {
