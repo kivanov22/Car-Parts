@@ -3,6 +3,7 @@ global using Microsoft.EntityFrameworkCore;
 using CarParts.API.Core.Interfaces;
 using CarParts.API.Core.Services;
 using CarParts.API.Infrastructure.Data.Repository;
+using CarParts_API.Controllers;
 using CarParts_API.SeedData;
 using System;
 
@@ -22,8 +23,13 @@ builder.Services.AddDbContext<CarPartsContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
+builder.Services.AddAutoMapper(
+                                typeof(IPartService).Assembly,
+                                typeof(PartController).Assembly);
+builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
+{
+    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
 
 
 //builder.Services.AddTransient<DataSeeder>();
@@ -39,7 +45,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     //builder.Configuration.AddUserSecrets<Program>();
 }
-
+app.UseCors("corspolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
