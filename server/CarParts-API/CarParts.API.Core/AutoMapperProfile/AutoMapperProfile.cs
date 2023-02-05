@@ -8,11 +8,23 @@ namespace CarParts.API.Core.AutoMapperProfile
     {
         public AutoMapperProfile()
         {
-            CreateMap<Part, PartDto>();
-            CreateMap<PartDto, Part>();
+            CreateMap<Part, PartDto>()
+                .ReverseMap()
+                //opt => opt.MapFrom(src => src.PartTypes.PartTypeName))
+                //.ForMember(dest => dest.PartTypes.Description,
+                //opt => opt.MapFrom(src => src.PartTypes.Description))
+            ;
+            CreateMap<PartDto, Part>()
+                
+            //.ForMember(dest => dest.PartTypes.PartTypeName,
+            //    opt => opt.MapFrom(src => src.PartTypes.PartTypeName))
+            //    .ForMember(dest => dest.PartTypes.Description,
+            //    opt => opt.MapFrom(src => src.PartTypes.Description))
+            ;
             CreateMap<IEnumerable<PartDto>, Part>();
             CreateMap<IEnumerable<Part>, PartDto>();
-            CreateMap<List<Part>, PartDto>();
+            CreateMap<List<Part>, PartDto>()
+                .ReverseMap();
             CreateMap<List<Part>, PartDto>();
         }
     }
