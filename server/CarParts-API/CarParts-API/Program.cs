@@ -1,35 +1,51 @@
 global using CarParts.API.Infrastructure.Data;
 global using Microsoft.EntityFrameworkCore;
+using CarParts.API.Core.Auth.JwtUtils;
+using CarParts.API.Core.Helpers;
 using CarParts.API.Core.Interfaces;
 using CarParts.API.Core.Services;
 using CarParts.API.Infrastructure.Data.Repository;
 using CarParts_API.Controllers;
+using CarParts_API.Middlewares;
 using CarParts_API.SeedData;
 using System;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IPartService, PartService>();
-//var connection = builder.Configuration["ConnectionStrings:localhost"];
-builder.Services.AddControllers();
-builder.Services.AddDbContext<CarPartsContext>(options =>
+{
+    var services = builder.Services;
+    var env = builder.Environment;
+
+    //var connection = builder.Configuration["ConnectionStrings:localhost"];
+
+    services.AddControllers()
+            .AddJsonOptions(x => x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
+
+    services.AddScoped<IUnitOfWork, UnitOfWork>();
+    services.AddScoped<IPartService, PartService>();
+    services.AddScoped<IJwtUtils, JwtUtils>();
+    services.AddScoped<IUserService, UserService>();
+
+    // configure strongly typed settings object
+    services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+
+    services.AddDbContext<CarPartsContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 });
+    services.AddCors();
 
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
+    services.AddAutoMapper(
                                 typeof(IPartService).Assembly,
                                 typeof(PartController).Assembly);
-builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
-{
-    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-}));
+
+}
 
 
 //builder.Services.AddTransient<DataSeeder>();
@@ -45,12 +61,27 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     //builder.Configuration.AddUserSecrets<Program>();
 }
-app.UseCors("corspolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+// configure HTTP request pipeline
+{
+    // global cors policy
+    app.UseCors(x => x
+        .SetIsOriginAllowed(origin => true)
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials());
+
+    // global error handler
+    app.UseMiddleware<ErrorHandlerMiddleware>();
+
+    // custom jwt auth middleware
+    app.UseMiddleware<JwtMiddleware>();
+
+    app.MapControllers();
+}
 
 //Seed Database
 //using (var scope = app.Services.CreateScope())
