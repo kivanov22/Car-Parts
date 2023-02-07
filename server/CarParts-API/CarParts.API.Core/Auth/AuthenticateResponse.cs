@@ -20,7 +20,7 @@ namespace CarParts.API.Core.Auth
 
         public AuthenticateResponse(User user, string jwtToken, string refreshToken)
         {
-            Id = id;
+            Id = user.Id;
             FirstName = user.FirstName;
             LastName = user.LastName;
             Username = user.Username;
