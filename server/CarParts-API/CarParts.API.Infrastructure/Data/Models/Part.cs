@@ -23,8 +23,9 @@ namespace Car_Parts_API.Infrastructure.Data.Models
 
         public PartType PartTypes { get; set; }
 
-        //public int Warranty { get; set; }
-
-        //public string Notes { get; set; }
+       
     }
 }
+//public int Warranty { get; set; }
+
+//public string Notes { get; set; }

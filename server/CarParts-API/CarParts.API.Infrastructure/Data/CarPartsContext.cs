@@ -1,4 +1,5 @@
 ﻿using Car_Parts_API.Infrastructure.Data.Models;
+using CarParts.API.Infrastructure.Data.Auth;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarParts.API.Infrastructure.Data
@@ -9,6 +10,8 @@ namespace CarParts.API.Infrastructure.Data
             :base(options)
         {
         }
+
+        public DbSet<User> Users { get; set; }
 
         public DbSet<Compatibility> Compatibilities { get; set; }
 
