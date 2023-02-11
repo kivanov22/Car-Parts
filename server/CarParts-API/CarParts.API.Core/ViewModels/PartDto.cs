@@ -6,6 +6,7 @@ namespace CarParts.API.Core.ViewModels
 {
     public class PartDto
     {
+
         [Required]
         public string PartName { get; set; }
 

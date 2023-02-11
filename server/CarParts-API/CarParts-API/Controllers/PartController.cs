@@ -106,5 +106,9 @@ namespace CarParts_API.Controllers
             return new JsonResult(Ok(mapPart));
         }
 
+
+        //edit
+        //details
+        //search
     }
 }
