@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Car_Parts_API.Infrastructure.Data.Models;
 using CarParts.API.Core.Interfaces;
 using CarParts.API.Core.ViewModels;
 using CarParts.API.Infrastructure.Data;
 using CarParts.API.Infrastructure.Data.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace CarParts.API.Core.Services
 {
@@ -24,10 +22,12 @@ namespace CarParts.API.Core.Services
 
         public async Task<PartDto> CreateAsync(PartDto partDto)
         {
-           var entity = _mapper.Map<PartDto,Part>(partDto);
+           var entity = _mapper.Map<Part>(partDto);
             await _unitOfWork.Parts.AddAsync(entity);
             await _unitOfWork.CommitAsync();
-            return _mapper.Map<Part,PartDto>(entity);
+
+            var mappedPart = _mapper.Map<PartDto>(entity);
+            return mappedPart;
         }
 
         public async Task DeleteAsync(int id)
@@ -42,14 +42,14 @@ namespace CarParts.API.Core.Services
 
         public  List<PartDto> GetAllAsync()
         {
-            return  _context.Parts.Select(p => new PartDto
+            return _context.Parts.Select(p => new PartDto
             {
                 PartName = p.PartName,
                 PartNumber= p.PartNumber,
                 PartDescription = p.PartDescription,
                 PartBrand = p.PartBrand,
-                PartTypeId = p.PartTypeId,
-                PartTypes = p.PartTypes
+                //PartTypeId = p.PartTypeId,
+                //PartTypes = p.PartTypes
             }).ToList();
             //var entities = await _unitOfWork.Parts.GetAllAsync();
             //var parts = await _context.Parts.ProjectTo<PartDto>(_mapper.ConfigurationProvider).ToListAsync();
