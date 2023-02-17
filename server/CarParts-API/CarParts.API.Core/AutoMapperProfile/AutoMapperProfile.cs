@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Car_Parts_API.Infrastructure.Data.Models;
+using CarParts.API.Core.Auth;
 using CarParts.API.Core.ViewModels;
+using CarParts.API.Infrastructure.Data.Auth;
 
 namespace CarParts.API.Core.AutoMapperProfile
 {
@@ -14,8 +16,31 @@ namespace CarParts.API.Core.AutoMapperProfile
                 //.ForMember(dest => dest.PartTypes.Description,
                 //opt => opt.MapFrom(src => src.PartTypes.Description))
             ;
-            CreateMap<PartDto, Part>()
-                
+            CreateMap<PartDto, Part>();
+
+            CreateMap<RegisterRequest, User>();
+            CreateMap<User, RegisterRequest>()
+                .ReverseMap();
+
+            // User -> AuthenticateResponse
+            //CreateMap<User, AuthenticateResponse>();
+
+            // RegisterRequest -> User
+            //CreateMap<RegisterRequest, User>();
+
+            // UpdateRequest -> User
+            CreateMap<UpdateRequest, User>()
+                .ForAllMembers(x => x.Condition(
+                    (src, dest, prop) =>
+                    {
+                        // ignore null & empty string properties
+                        if (prop == null) return false;
+                        if (prop.GetType() == typeof(string) && string.IsNullOrEmpty((string)prop)) return false;
+
+                        return true;
+                    }
+                ));
+
             //.ForMember(dest => dest.PartTypes.PartTypeName,
             //    opt => opt.MapFrom(src => src.PartTypes.PartTypeName))
             //    .ForMember(dest => dest.PartTypes.Description,
