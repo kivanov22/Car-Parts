@@ -28,6 +28,14 @@ namespace CarParts_API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost]
+        public IActionResult Register(RegisterRequest model)
+        {
+            _userService.Register(model);
+            return Ok(new { message = "Registration successful" });
+        }
+
+        [AllowAnonymous]
         [HttpPost("refresh-token")]
         public IActionResult RefreshToken()
         {
