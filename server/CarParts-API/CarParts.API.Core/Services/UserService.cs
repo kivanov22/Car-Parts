@@ -1,11 +1,12 @@
-﻿using BCrypt.Net;
-using CarParts.API.Core.Auth;
+﻿using CarParts.API.Core.Auth;
 using CarParts.API.Core.Auth.JwtUtils;
 using CarParts.API.Core.Helpers;
 using CarParts.API.Core.Interfaces;
 using CarParts.API.Infrastructure.Data;
 using CarParts.API.Infrastructure.Data.Auth;
 using Microsoft.Extensions.Options;
+using AutoMapper;
+using BCrypt.Net;
 
 namespace CarParts.API.Core.Services
 {
@@ -14,16 +15,19 @@ namespace CarParts.API.Core.Services
         private CarPartsContext _context;
         private IJwtUtils _jwtUtils;
         private readonly AppSettings _appSettings;
+        private readonly IMapper _mapper;
 
         public UserService(
             CarPartsContext context,
             IJwtUtils jwtUtils,
-            IOptions<AppSettings> appSettings
+            IOptions<AppSettings> appSettings,
+            IMapper mapper
             )
         {
             _context = context;
             _jwtUtils = jwtUtils;
             _appSettings = appSettings.Value;
+            _mapper = mapper;
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model, string ipAddress)
@@ -52,6 +56,27 @@ namespace CarParts.API.Core.Services
         public IEnumerable<User> GetAll()
         {
             return _context.Users;
+        }
+
+        public void Register(RegisterRequest model)
+        {
+            //validate
+            if (_context.Users.Any(x => x.Username == model.Username))
+                throw new AppException("Username " + model.Username + "is already taken");
+
+            if (model.Password != model.ConfirmPassword)
+                throw new AppException("Passwords must match!");
+
+
+            //map model to new user object
+            var user = _mapper.Map<User>(model);
+
+            //hash password
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
+
+            //save user
+            _context.Users.Add(user);
+            _context.SaveChanges();
         }
 
         public User GetById(int id)
