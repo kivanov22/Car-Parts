@@ -1,0 +1,22 @@
+.brand{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    
+    .brands{
+        display: flex;
+        flex-direction: row;
+        width: 1240px;
+        height: 151px;
+        gap: 20px;
+        border-bottom: 2px solid #e5e5e5;
+
+        .brand{
+            width: 150px;
+            height: 100px;
+        }
+    }
+    }

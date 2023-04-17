@@ -1,0 +1,48 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+  height: 486px;
+  // background-color: #09f;
+
+//   span {
+//   }
+
+  .aboutUs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 400px;
+
+    .socials {
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  .myAccount {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .extras {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .information {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 345px;
+  }
+}
