@@ -1,16 +1,16 @@
 import './App.scss';
-import Banner from './components/Banner/Banner';
-import Brand from './components/Brands/Brand';
-import Category from './components/Categories/Category';
-import Footer from './components/Footer/Footer';
-import Navbar from './components/Navigation/Navbar';
+import Banner from './components/banner/Banner';
+import Brand from './components/brands/Brand';
+import Category from './components/categories/Category';
+import Footer from './components/footer/Footer';
+import Navbar from './components/navigation/Navbar';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Catalog from './pages/CatalogParts/Catalog';
-import Register from './pages/Register/Register';
-import Login from './pages/Login/Login';
+import Catalog from './pages/catalogParts/Catalog';
+import Register from './pages/register/Register';
+import Login from './pages/login/Login';
 
 function App() {
   const Layout =()=>{
