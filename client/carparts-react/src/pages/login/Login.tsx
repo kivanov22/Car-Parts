@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import Input from "../../components/inputs/Input"
 import "./Login.scss"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import  { makeApiRequest } from "../../utils/newRequest";
 
 interface UserData {
@@ -42,7 +42,8 @@ const Login = () => {
       <Input label='Password' value={values.password} onChange={(value)=>onChange('password',value)}/>
       <button type='submit'>Login</button>
       <hr />
-      <p>Not registered, click here!</p>
+      <p>Not registered? <Link to="/register">click here!</Link></p>
+      
     </form>
   )
 }

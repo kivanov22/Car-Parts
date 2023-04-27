@@ -15,6 +15,14 @@ namespace CarParts.API.Infrastructure.Data.Auth
         [JsonIgnore]
         public string PasswordHash { get; set; }
 
+        public Role Role { get; set; }
+
+        public string VerificationToken { get; set; }
+
+
+        public DateTime Created { get; set; }
+        public DateTime? Updated { get; set; }
+
         [JsonIgnore]
         public List<RefreshToken> RefreshTokens { get; set; }
     }

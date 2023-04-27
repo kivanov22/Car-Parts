@@ -11,6 +11,8 @@ namespace CarParts.API.Infrastructure.Data.Auth
         [JsonIgnore]
         public int Id { get; set; }
 
+        public User User { get; set; }
+
         public string Token { get; set; }
 
         public DateTime Expires { get; set; }

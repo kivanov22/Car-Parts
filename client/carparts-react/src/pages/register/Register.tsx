@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.scss";
 import Input from "../../components/inputs/Input";
 import  { makeApiRequest } from "../../utils/newRequest";
@@ -59,7 +59,7 @@ const Register = () => {
       <Input label="Confirm Password" value={values.confirmPassword} onChange={(value)=>onChange('confirmPassword',value)}/>
       <button type="submit">Register</button>
       <hr />
-      <p>Already got an account, click here!</p>
+      <p>Already got an account? <Link to="/login">click here!</Link></p>
     </form>
   );
 };

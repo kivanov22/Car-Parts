@@ -420,6 +420,9 @@ namespace CarParts.API.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -432,7 +435,17 @@ namespace CarParts.API.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Updated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerificationToken")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -575,8 +588,10 @@ namespace CarParts.API.Infrastructure.Migrations
 
                             b1.ToTable("RefreshToken");
 
-                            b1.WithOwner()
+                            b1.WithOwner("User")
                                 .HasForeignKey("UserId");
+
+                            b1.Navigation("User");
                         });
 
                     b.Navigation("RefreshTokens");

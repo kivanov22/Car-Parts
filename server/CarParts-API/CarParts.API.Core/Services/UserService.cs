@@ -1,15 +1,16 @@
-﻿using CarParts.API.Core.Auth;
-using CarParts.API.Core.Auth.JwtUtils;
-using CarParts.API.Core.Helpers;
-using CarParts.API.Core.Interfaces;
-using CarParts.API.Infrastructure.Data;
-using CarParts.API.Infrastructure.Data.Auth;
-using Microsoft.Extensions.Options;
-using AutoMapper;
-using BCrypt.Net;
-
-namespace CarParts.API.Core.Services
+﻿namespace CarParts.API.Core.Services
 {
+    using CarParts.API.Core.Auth;
+    using CarParts.API.Core.Auth.JwtUtils;
+    using CarParts.API.Core.Helpers;
+    using CarParts.API.Core.Interfaces;
+    using CarParts.API.Infrastructure.Data;
+    using CarParts.API.Infrastructure.Data.Auth;
+    using Microsoft.Extensions.Options;
+    using AutoMapper;
+    using BCrypt.Net;
+    using System.Security.Cryptography;
+
     public class UserService : IUserService
     {
         private CarPartsContext _context;
@@ -35,7 +36,7 @@ namespace CarParts.API.Core.Services
             var user = _context.Users.SingleOrDefault(x => x.Username == model.Username);
 
             // validate
-            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
+            if (user == null || !BCrypt.Verify(model.Password, user.PasswordHash))
                 throw new AppException("Username or password is incorrect");
 
             //authentication successful so generate jwt and refresh tokens
@@ -68,11 +69,17 @@ namespace CarParts.API.Core.Services
                 throw new AppException("Passwords must match!");
 
 
+
             //map model to new user object
             var user = _mapper.Map<User>(model);
+            var isFirstAccount = _context.Users.Count() == 0;
+            user.Role = isFirstAccount ? Role.Admin : Role.User;
+            user.Created = DateTime.UtcNow;
+            user.VerificationToken = generateVerificationToken();
+
 
             //hash password
-            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
+            user.PasswordHash = BCrypt.HashPassword(model.Password);
 
             //save user
             _context.Users.Add(user);
@@ -177,6 +184,19 @@ namespace CarParts.API.Core.Services
             user.RefreshTokens.RemoveAll(x =>
                 !x.IsActive &&
                 x.Created.AddDays(_appSettings.RefreshTokenTTL) <= DateTime.UtcNow);
+        }
+
+        private string generateVerificationToken()
+        {
+            // token is a cryptographically strong random sequence of values
+            var token = Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+
+            // ensure token is unique by checking against db
+            var tokenIsUnique = !_context.Users.Any(x => x.VerificationToken == token);
+            if (!tokenIsUnique)
+                return generateVerificationToken();
+
+            return token;
         }
     }
 }

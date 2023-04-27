@@ -28,7 +28,7 @@ namespace CarParts_API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult Register(RegisterRequest model)
         {
             _userService.Register(model);
