@@ -17,11 +17,11 @@ const Footer = () => {
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde minus nemo vero nostrum? Officia, earum.</p>
         <div className='socials'>
         {/* icons facebook,twitter,linkin */}
-        <FontAwesomeIcon icon={faFacebook}/>
-        <FontAwesomeIcon icon={faTwitter}/>
-        <FontAwesomeIcon icon={faLinkedin}/>
-        <FontAwesomeIcon icon={faYoutube}/>
-        <FontAwesomeIcon icon={faInstagram}/>
+        <FontAwesomeIcon icon={faFacebook} className='socialIcons'/>
+        <FontAwesomeIcon icon={faTwitter} className='socialIcons'/>
+        <FontAwesomeIcon icon={faLinkedin} className='socialIcons'/>
+        <FontAwesomeIcon icon={faYoutube} className='socialIcons'/>
+        <FontAwesomeIcon icon={faInstagram} className='socialIcons'/>
         </div>
         </div>
         <div className='myAccount'>

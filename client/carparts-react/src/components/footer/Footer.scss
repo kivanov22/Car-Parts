@@ -5,7 +5,8 @@
   align-items: center;
   margin-bottom: 20px;
   height: 486px;
-  // background-color: #09f;
+  // background-color: #222325;
+  background-color: #212121;
 
 //   span {
 //   }
@@ -17,9 +18,28 @@
     gap: 10px;
     width: 400px;
 
+    h3{
+      color: white;
+
+    }
+
+    p{
+      color: white;
+    }
+
     .socials {
       display: flex;
       gap: 20px;
+
+      .socialIcons{
+        color: white;
+        background-color: transparent;
+        width: 25px;
+        height: 25px;
+        border: 2px solid white;
+        border-radius: 15px;
+        margin: 5px 10px;
+      }
     }
   }
 

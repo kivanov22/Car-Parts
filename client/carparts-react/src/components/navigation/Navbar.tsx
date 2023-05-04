@@ -6,6 +6,7 @@ import {
   faHeart,
   faWarehouse,
   faUser,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
@@ -27,12 +28,19 @@ const Navbar = () => {
       </div>
       <div className="mid">
         <input type="text" placeholder="search for ..." />
-        <button>Search</button>
+        <button>
+          <FontAwesomeIcon icon={faSearch} />
+          </button>
       </div>
       <div className="right">
         {/* cart icon and total sum */}
         <div className="userIcons">
+          <div className="favoritesContainer">
+          <p>Favorites</p>
           <FontAwesomeIcon icon={faHeart} />
+          </div>
+          <div className="userContainer">
+          <p>Account</p>
           <FontAwesomeIcon icon={faUser} onClick={handleOpen}/>
           {isOpen && 
           <div className="userModal">
@@ -40,7 +48,11 @@ const Navbar = () => {
             <p>Register</p>
           </div>
           }
+          </div>
+          <div className="myPartsContainer">
+            <p>My Parts</p>
           <FontAwesomeIcon icon={faWarehouse} />
+          </div>
         </div>
         <div className="shoppingCart">
           <FontAwesomeIcon icon={faShoppingCart} />
