@@ -7,6 +7,7 @@ import Navbar from "./components/navigation/Navbar";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Component, lazy, Suspense } from "react";
 import LoadingSpinner from "./components/spinner/LoadingSpinner";
+import Part from "./components/part/Part";
 
 function App() {
   const fakeDelay = async(promise:any)=>{
@@ -35,6 +36,7 @@ function App() {
         <Navbar />
         <hr />
         <Banner />
+        <Part />
         <Category />
         <Brand />
         <Footer />

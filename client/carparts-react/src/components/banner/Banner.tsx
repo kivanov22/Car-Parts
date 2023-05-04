@@ -8,11 +8,11 @@ import { useSearchParams } from "react-router-dom";
 // import {car1} from "../../../public/images/audi.jpg"
 
 const Banner = () => {
-  const [search, setSearch] = useSearchParams();
+//   const [search, setSearch] = useSearchParams();
 
-  const handleSearch = () => {
-    setSearch();
-  };
+//   const handleSearch = (e) => {
+//     setSearch();
+//   };
 
   return (
     <div className="banner">

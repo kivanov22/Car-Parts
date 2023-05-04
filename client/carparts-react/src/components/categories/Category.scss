@@ -6,7 +6,30 @@
     align-items: center;
 
     .subCategory {
+      display: flex;
+      gap: 20px;
+
       
+      ul{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        list-style: none;
+      }
+      li{
+
+        a{
+          text-decoration: none;
+          color:black;
+        }
+      }
+
+      li::selection{
+        background-color: #09f;
+        color: black;
+        border: none;
+        border-radius: 15px;
+      }
     }
 
   .container {
