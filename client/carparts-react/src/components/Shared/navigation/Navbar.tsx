@@ -6,17 +6,25 @@ import {
   faHeart,
   faWarehouse,
   faUser,
-  faSearch
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const Navbar = () => {
-  const[isOpen,setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
-  const handleOpen = ()=>{
+  const handleMouseOver = () => {
+    setHovered(true);
+  };
 
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+  const handleOpen = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   return (
     <div className="navbar">
@@ -30,34 +38,43 @@ const Navbar = () => {
         <input type="text" placeholder="search for ..." />
         <button>
           <FontAwesomeIcon icon={faSearch} />
-          </button>
+        </button>
       </div>
       <div className="right">
         {/* cart icon and total sum */}
         <div className="userIcons">
           <div className="favoritesContainer">
-          <p>Favorites</p>
-          <FontAwesomeIcon icon={faHeart} />
+            <FontAwesomeIcon icon={faHeart} />
+            <p>Favorites</p>
           </div>
           <div className="userContainer">
-          <p>Account</p>
-          <FontAwesomeIcon icon={faUser} onClick={handleOpen}/>
-          {isOpen && 
-          <div className="userModal">
-            <p>Login</p>
-            <p>Register</p>
-          </div>
-          }
+            <FontAwesomeIcon icon={faUser} onClick={handleOpen} />
+            <p>Account</p>
+            {isOpen && (
+              <div className="userModal">
+                <p>Login</p>
+                <p>Register</p>
+              </div>
+            )}
           </div>
           <div className="myPartsContainer">
+            <FontAwesomeIcon icon={faWarehouse} />
             <p>My Parts</p>
-          <FontAwesomeIcon icon={faWarehouse} />
           </div>
         </div>
-        <div className="shoppingCart">
+        <div
+          className="shoppingCart"
+          onMouseOver={handleMouseOver}
+          onMouseLeave={handleMouseLeave}
+        >
           <FontAwesomeIcon icon={faShoppingCart} />
           <p>Items: 0</p>
           <p>Total: 25$</p>
+          {hovered && (
+            <div className="cartModal">
+              <p>5 Items</p>
+            </div>
+          )}
         </div>
         {/* favorites */}
         {/* my listings */}

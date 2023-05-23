@@ -1,0 +1,42 @@
+.catalog{
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+
+    .leftCatalog{
+        display: flex;
+        flex-direction: column;
+        width: 320px;
+        overflow: visible;
+        min-width: 1721px;
+
+        .categoriesVehicle{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .categoriesFilter{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .rightCatalog{
+        display: flex;
+        flex-direction: column;
+        width: 960px;
+
+        .sort{
+            display: flex;
+            gap: 20px;
+            justify-content: end;
+            align-items: center;
+        }
+        .catalogCards{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+    }
+}

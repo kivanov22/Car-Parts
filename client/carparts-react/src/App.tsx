@@ -1,12 +1,12 @@
 import "./App.scss";
-import Banner from "./components/banner/Banner";
-import Brand from "./components/brands/Brand";
-import Category from "./components/categories/Category";
-import Footer from "./components/footer/Footer";
-import Navbar from "./components/navigation/Navbar";
+import Banner from "./components/Home/banner/Banner";
+import Brand from "./components/Home/brands/Brand";
+import Category from "./components/Home/categories/Category";
+import Footer from "./components/Shared/footer/Footer";
+import Navbar from "./components/Shared/navigation/Navbar";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Component, lazy, Suspense } from "react";
-import LoadingSpinner from "./components/spinner/LoadingSpinner";
+import LoadingSpinner from "./components/Shared/spinner/LoadingSpinner";
 import Part from "./components/part/Part";
 
 function App() {
