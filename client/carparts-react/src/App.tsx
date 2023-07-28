@@ -8,6 +8,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Component, lazy, Suspense } from "react";
 import LoadingSpinner from "./components/Shared/spinner/LoadingSpinner";
 import Part from "./components/part/Part";
+import CreatePart from "./pages/create/CreatePart";
+import Search from "./components/Home/search/Search";
 
 function App() {
   const fakeDelay = async(promise:any)=>{
@@ -36,6 +38,7 @@ function App() {
         <Navbar />
         <hr />
         <Banner />
+        <Search />
         <Part />
         <Category />
         <Brand />
@@ -58,6 +61,10 @@ function App() {
     {
       path: "/catalog",
       element: <Catalog />,
+    },
+    {
+      path: "/create",
+      element: <CreatePart />,
     },
     {
       path: "/register",

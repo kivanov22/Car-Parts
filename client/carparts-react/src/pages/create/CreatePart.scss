@@ -1,0 +1,35 @@
+.create{
+    display: flex;
+    justify-content: center;
+    .container{
+        width: 1400px;
+        padding: 50px 0px;
+
+        .sections {
+            display: flex;
+            justify-content: space-between;
+            gap: 100px;
+
+            .left,.right{
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                gap: 10px;
+                justify-content: space-between;
+
+                .images{
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+
+                    .imagesInputs{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                    }
+                }
+            }
+            
+        }
+    }
+}

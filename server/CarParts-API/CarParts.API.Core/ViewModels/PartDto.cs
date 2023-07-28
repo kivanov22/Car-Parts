@@ -17,8 +17,8 @@ namespace CarParts.API.Core.ViewModels
         [Required]
         public string PartBrand { get; set; }
 
-        [ForeignKey("PartTypeId")]
-        public int PartTypeId { get; set; }
+        //[ForeignKey("PartTypeId")]
+        //public int PartTypeId { get; set; }
 
         public PartType PartTypes { get; set; }
     }
