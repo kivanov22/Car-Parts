@@ -16,6 +16,21 @@ namespace Car_Parts_API.Infrastructure.Data.Models
         public string? PartDescription { get; set; }
 
         [Required]
+        public string CoverImage { get; set; }
+
+        [Required]
+        public string Images { get; set; }
+
+        [Required]
+        public string Category { get; set; }
+
+        public string? Material { get; set; }
+        public double Size { get; set; }
+
+        [Required]
+        public string Condition { get; set; }
+
+        [Required]
         public  string PartBrand { get; set; }
 
         [ForeignKey("PartTypeId")]

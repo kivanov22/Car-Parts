@@ -1,0 +1,21 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  select,
+  input {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #0070d1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+}
