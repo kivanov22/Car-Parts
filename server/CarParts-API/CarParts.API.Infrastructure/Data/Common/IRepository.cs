@@ -9,7 +9,7 @@
 
         //Task<bool> DeleteAsync(T entity);
         Task UpdateAsync(int id,T entity);
-        List<T> GetAllAsync();
+        Task<List<T>> GetAllAsync();
         //Task<List<T>> GetAllAsync();
         Task<T?> GetByIdAsync(int id);
     }

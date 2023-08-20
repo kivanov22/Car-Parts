@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Car_Parts_API.Infrastructure.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Collections.Generic;
 
@@ -47,9 +48,16 @@ namespace CarParts.API.Infrastructure.Data.Common
         //{
         //    return await _dbSet.ToListAsync();
         //}
-        public List<T> GetAllAsync()
+
+        // async Task<List<Part>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync()
         {
-            return  _dbSet.ToList();
+            //return await _dbSet
+            //    .Include(p=>p.VehicleMake)
+            //    .Include(p=>p.VehicleModel)
+            //    .Include(p=>p.Price)
+            //    .ToList();
+            return await _dbSet.ToListAsync();
         }
         public async Task<T?> GetByIdAsync(int id)
         {
