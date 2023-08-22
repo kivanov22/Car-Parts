@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Car_Parts_API.Infrastructure.Data.Models;
 using CarParts.API.Core.Auth;
-using CarParts.API.Core.ViewModels;
+using CarParts.API.Core.ViewModels.Parts;
 using CarParts.API.Infrastructure.Data.Auth;
 
 namespace CarParts.API.Core.AutoMapperProfile
@@ -51,6 +51,12 @@ namespace CarParts.API.Core.AutoMapperProfile
             CreateMap<List<Part>, PartDto>()
                 .ReverseMap();
             CreateMap<List<Part>, PartDto>();
+
+            CreateMap<IEnumerable<AllPartsDto>, Part>();
+            CreateMap<IEnumerable<Part>, AllPartsDto>();
+            CreateMap<List<Part>, AllPartsDto>()
+                .ReverseMap();
+            CreateMap<List<Part>, AllPartsDto>();
         }
     }
 }
