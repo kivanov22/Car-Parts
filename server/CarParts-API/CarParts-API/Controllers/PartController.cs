@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Car_Parts_API.Infrastructure.Data.Models;
-using CarParts.API.Core.ViewModels;
+using CarParts.API.Core.ViewModels.Parts;
 using CarParts.API.Infrastructure.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -48,23 +48,23 @@ namespace CarParts_API.Controllers
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
-        //[HttpGet]
-        //public async Task<IActionResult> GetParts()
-        //{
-        //    //var parts = await _unitOfWork.Parts.GetAllAsync();
-        //    //var mappedDtos =_mapper.Map<IEnumerable<Part>, PartDto>(parts);
-
-
-        //    return Ok(mappedDtos);
-        //}
-
         [HttpGet]
-        public ActionResult<List<PartDto>> GetAllParts()//fix make it async
+        public async Task<IActionResult> GetAllParts()
         {
-            var parts = _unitOfWork.Parts.GetAllAsync();
+            var parts = await _unitOfWork.Parts.GetAllAsync();
+            //var mappedDtos =_mapper.Map<IEnumerable<Part>, PartDto>(parts);
 
-            return Ok(parts.Select(part=>_mapper.Map<PartDto>(part)));
+
+            return Ok(parts.Select(p=>_mapper.Map<PartsQueryModel>(p)));
         }
+
+        //[HttpGet]
+        //public ActionResult<List<AllPartsDto>> GetAllParts()//fix make it async
+        //{
+        //    var parts = _unitOfWork.Parts.GetAllAsync();
+
+        //    return Ok(parts.Select(part=>_mapper.Map<AllPartsDto>(part)));
+        //}
 
 
         [HttpPost]
