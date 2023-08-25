@@ -1,4 +1,4 @@
-﻿using CarParts.API.Core.ViewModels;
+﻿using CarParts.API.Core.ViewModels.Parts;
 
 namespace CarParts.API.Core.Interfaces
 {
