@@ -5,7 +5,7 @@
         MakeAndModel = 0,
         Year = 1,
         DateCreated = 2,
-        Ascending=3,
-        Descending=4,
+        PriceAscending=3,
+        PriceDescending=4,
     }
 }

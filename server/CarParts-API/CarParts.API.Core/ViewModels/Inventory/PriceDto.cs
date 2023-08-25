@@ -18,13 +18,13 @@ namespace CarParts.API.Core.ViewModels.Inventory
 
         public decimal ShippingCost { get; set; }
 
-        public int PartNumber { get; set; }
+        //public int PartNumber { get; set; }
 
-        [Required]
-        public string PartName { get; set; }
+        //[Required]
+        //public string PartName { get; set; }
 
-        [Required]
-        public string ManufacturerName { get; set; }
+        //[Required]
+        //public string ManufacturerName { get; set; }
 
 
         public string? Notes { get; set; }
