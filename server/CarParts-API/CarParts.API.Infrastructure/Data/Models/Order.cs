@@ -5,11 +5,14 @@ namespace Car_Parts_API.Infrastructure.Data.Models
 {
     public class Order
     {
-
+        public Order()
+        {
+            Id = Guid.NewGuid();
+        }
         //This table would store detailed information about customer orders, including customer information, order date,
         //shipping address, and the specific parts that were ordered along with their quantity.
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public DateTime OrderDate { get; set; } = DateTime.Today;
 

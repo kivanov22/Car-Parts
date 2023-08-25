@@ -20,6 +20,6 @@ namespace Car_Parts_API.Infrastructure.Data.Models
         public string? SupplierDetails { get; set; }
 
         [ForeignKey("PartId")]
-        public int PartId { get; set; }
+        public Guid PartId { get; set; }
     }
 }

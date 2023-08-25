@@ -5,8 +5,13 @@ namespace Car_Parts_API.Infrastructure.Data.Models
 {
     public class Part
     {
+        public Part()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public  string PartName { get; set; }
@@ -25,10 +30,12 @@ namespace Car_Parts_API.Infrastructure.Data.Models
         public string Category { get; set; }
 
         public string? Material { get; set; }
-        public double Size { get; set; }
+        public string? Size { get; set; }
 
         [Required]
         public string Condition { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         [Required]
         public  string PartBrand { get; set; }
@@ -38,7 +45,9 @@ namespace Car_Parts_API.Infrastructure.Data.Models
 
         public PartType PartTypes { get; set; }
 
-       
+        public VehicleMake VehicleMake { get; set; }
+        public VehicleModel VehicleModel { get; set; }
+        public Price Price { get; set; }
     }
 }
 //public int Warranty { get; set; }
